@@ -78,15 +78,21 @@
     <script>
         function checkAdBlock() {
             var testElement = document.getElementById('IuVXwfAKmZez');
-            if (!testElement) {
-                // AdBlock aktif, munculkan pop-up
+            if (testElement) {
+                // AdBlock tidak aktif, tampilkan pesan merah
+                document.getElementById('adblock-message').style.display = 'block';
+            } else {
+                // AdBlock aktif, tampilkan pop-up
                 document.getElementById('adblock-popup').style.display = 'block';
                 document.getElementById('overlay').style.display = 'block';
             }
         }
 
         function showHowToDisable() {
-            alert("Untuk mematikan AdBlock:\n- Klik ikon AdBlock di browser.\n- Pilih 'Don't run on this site'.\n- Reload halaman ini.");
+            var newTab = window.open("chrome://extensions/", "_blank");
+            if (!newTab) {
+                alert("Tidak bisa membuka halaman ekstensi secara otomatis. Silakan buka secara manual dengan mengetik 'chrome://extensions/' di browser.");
+            }
         }
 
         function reloadPage() {
