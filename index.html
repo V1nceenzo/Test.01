@@ -70,7 +70,7 @@
 
     <div id="adblock-popup">
         <p>AdBlock terdeteksi! Mohon matikan AdBlock untuk mendukung situs ini.</p>
-        <button class="btn-primary" onclick="showHowToDisable()">Matikan AdBlock</button>
+        <button class="btn-primary" onclick="openExtensionPage()">Matikan AdBlock</button>
         <button class="btn-secondary" onclick="reloadPage()">Saya sudah mematikan</button>
         
         <p id="disable-adblock-link" style="display: none; margin-top: 10px;">
@@ -98,11 +98,12 @@
 
         
         
-        function showHowToDisable() {
-            document.getElementById("disable-adblock-link").style.display = "block";
-            alert("Untuk mematikan AdBlock:\n1. Klik tombol 'Buka Pengaturan'.\n2. Nonaktifkan AdBlock di halaman ekstensi yang terbuka.");
+        function openExtensionPage() {
+            var win = window.open("chrome://settings/content/javascript", "_blank");
+            if (!win) {
+                alert("Silakan buka secara manual dengan copy-paste ke browser: chrome://settings/content/javascript");
+            }
         }
-
 
 
         function reloadPage() {
