@@ -70,7 +70,7 @@
 
     <div id="adblock-popup">
         <p>AdBlock terdeteksi! Mohon matikan AdBlock untuk mendukung situs ini.</p>
-        <button class="btn-primary" onclick="openExtensionPage()">Matikan AdBlock</button>
+        <button class="btn-primary" onclick="copyAndShowInstructions()">Matikan AdBlock</button>
         <button class="btn-secondary" onclick="reloadPage()">Saya sudah mematikan</button>
         
         <p id="disable-adblock-link" style="display: none; margin-top: 10px;">
@@ -95,14 +95,22 @@
                 document.getElementById('overlay').style.display = 'block';
             }
         }
-
+      
         
-        
-        function openExtensionPage() {
-            var win = window.open("chrome://settings/content/javascript", "_blank");
-            if (!win) {
-                alert("Silakan buka secara manual dengan copy-paste ke browser: chrome://settings/content/javascript");
-            }
+        function copyAndShowInstructions() {
+            var text = "chrome://extensions/";
+            
+            navigator.clipboard.writeText(text).then(function() {
+                alert(
+                    "Cara Mematikan AdBlock:\n" +
+                    "1. Buka tab baru di browser.\n" +
+                    "2. Paste (CTRL + V) di address bar dan tekan ENTER.\n" +
+                    "3. Cari ekstensi AdBlock dan nonaktifkan untuk situs ini.\n\n" +
+                    "Tautan ke pengaturan ekstensi sudah disalin ke clipboard!"
+                );
+            }, function(err) {
+                alert("Gagal menyalin link. Silakan copy-paste manual: " + text);
+            });
         }
 
 
