@@ -96,11 +96,26 @@
             }
         }
       
+
+        function getExtensionURL() {
+            let userAgent = navigator.userAgent.toLowerCase();
         
+            if (userAgent.includes("chrome") && !userAgent.includes("edg")) return "chrome://extensions/";
+            if (userAgent.includes("edg")) return "edge://extensions/";
+            if (userAgent.includes("brave")) return "brave://extensions/";
+            if (userAgent.includes("opera")) return "opera://extensions/";
+            if (userAgent.includes("vivaldi")) return "vivaldi://extensions/";
+            if (userAgent.includes("firefox")) return "about:addons";
+        
+            return "chrome://extensions/"; // Default ke Chrome jika tidak terdeteksi
+        }
+
+        
+                
         function copyAndShowInstructions() {
-            var text = "chrome://extensions/";
+            let extensionURL = getExtensionURL();
             
-            navigator.clipboard.writeText(text).then(function() {
+            navigator.clipboard.writeText(extensionURL).then(function() {
                 alert(
                     "Cara Mematikan AdBlock:\n" +
                     "1. Buka tab baru di browser.\n" +
@@ -109,10 +124,9 @@
                     "Tautan ke pengaturan ekstensi sudah disalin ke clipboard!"
                 );
             }, function(err) {
-                alert("Gagal menyalin link. Silakan copy-paste manual: " + text);
+                alert("Gagal menyalin link. Silakan copy-paste manual: " + extensionURL);
             });
         }
-
 
         function reloadPage() {
             location.reload();
