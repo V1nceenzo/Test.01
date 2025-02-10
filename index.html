@@ -89,11 +89,15 @@
         }
 
         function showHowToDisable() {
-            var newTab = window.open("chrome://extensions/", "_blank");
-            if (!newTab) {
-                alert("Tidak bisa membuka halaman ekstensi secara otomatis. Silakan buka secara manual dengan mengetik 'chrome://extensions/' di browser.");
+            let confirmation = confirm("Untuk mematikan AdBlock:\n1. Klik tombol 'Buka Pengaturan'.\n2. Nonaktifkan AdBlock di halaman ekstensi yang terbuka.");
+        
+            if (confirmation) {
+                window.open("chrome://extensions/", "_blank");
+            } else {
+                alert("Silakan buka manual dengan mengetik 'chrome://extensions/' di browser.");
             }
         }
+
 
         function reloadPage() {
             location.reload();
